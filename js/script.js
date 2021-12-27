@@ -232,5 +232,8 @@ $(function() {
   })
 
   // this plays the startup sound on page load
+  
+$(document).ready(function() {
   $("#startup-sound").get(0).play();
+});
 })

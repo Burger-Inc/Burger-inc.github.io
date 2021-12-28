@@ -1,1 +1,1 @@
-# Burger-inc.github.io
+# [Burger-inc.github.io](http://burger-inc.github.io)

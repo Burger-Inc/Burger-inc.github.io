@@ -1,449 +1,409 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Burger</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BurgerTech forever</title>
-    <meta name="description" content="BurgerTech forever">
-    <link rel="shortcut icon" href="src/icons/favicon.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="src/icons/favicon.png">
-    <meta name="theme-color" content="#000"/>
-    <link rel="manifest" href="manifest.json" />
-    <meta name="author" content="0xb4dc0d3x">
-    <meta name="robots" content="index, follow">
-    <meta name="rating" content="safe for kids">
-    <meta property="og:type" content="BurgerTech forever">
-    <meta property="og:title" content="BurgerTech forever">
-    <meta property="og:url" content="/">
-    <meta property="og:image" content="src/img18.jpg">
-    <meta property="og:description" content="BurgerTech forever">
-    <link rel="preload" href="src/wallpaper/img100.webp" as="image">
-    <link rel="preload" href="src/wallpaper/img18.webp" as="image">
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js');
-            });
-        }
-    </script>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="src/css/jquery-ui.min.css"> -->
-    <!-- For Boot Screen -->
-    <style>
-        * {
-            margin: 0;
-            overflow: hidden;
-        }
 
-        .boot,
-        .boot-animation {
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            cursor: none;
-        }
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-        .boot-animation {
-            display: none;
-            filter: brightness(1.34) contrast(1.06);
-            background-color: white;
-        }
-    </style>
-    <link rel="stylesheet" href="src/css/style.css">
-
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
 <body>
-    <!-- Use this for custom cursor -->
-    <!--<img src="http://www.rw-designer.com/cursor-extern.php?id=139827" id="mouse" style="position: absolute;transition:none;pointer-events: none;z-index: 10000;" height=35>
-    <script>
-        document.body.onmousemove = e => {
-            document.querySelector("#mouse").style.setProperty("top", e.clientY + 'px');
-            document.querySelector("#mouse").style.setProperty("left", e.clientX + 'px');
-        }
-    </script>-->
-    <!-- password dialog -->
-    <div class="passwordDialog">
-        <div class="userProfile"><img src="src/icons/user.svg" alt="User Profile"></div>
-        <div class="username">User Name</div>
-        <div class="sign-in-content">
-            <div class="sign-in-method active" id="method_1" data-tab-info>
-                <input type="password" placeholder="PIN" id="passwordField">
-                <span class="hint">Your password is: burger</span>
-                <div class="forgotOption">I forgot my pin</div>
-            </div>
-            <div class="sign-in-method" id="method_2" data-tab-info>
-                <img src="src/others/helloSearching.webp" width="50" style="margin-block-end: 10px;filter:blur(.5px)">
-            </div>
-        </div>
-        <div class="otherSignInOptions">Sign-in options
-            <div class="sign-in-methods">
-                <img data-tab-value="#method_1" src="src/icons/dialpad.svg">
-                <img data-tab-value="#method_2" src="src/icons/eye.svg">
-            </div>
-        </div>
-        <script>
-            var sIMethods = document.querySelectorAll('[data-tab-value]')
-            var sIContents = document.querySelectorAll('[data-tab-info]')
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
 
-            sIMethods.forEach(m => {
-                m.addEventListener('click', () => {
-                    var sITarget = document.querySelector(m.dataset.tabValue);
-
-                    sIContents.forEach(p => {
-                        p.classList.remove('active')
-                    })
-                    sITarget.classList.add('active');
-                })
-            })
-        </script>
-    </div>
-    <!-- Lock Screen Box -->
-    <div id="lockScreen">
-        <div id="timeBox">
-            <span class="time">02:55</span>
-            <span class="date">Thursday, June 2017</span>
-        </div>
-    </div>
-
-    <!-- making a power on div and make user click a button so that we can autoplay videos -->
-    <div class="powerOnBox">
-        <div class="power-switch" id="powerOnBtn">
-            <input type="checkbox" />
-            <div class="button">
-                <svg class="power-off">
-                    <use xlink:href="#a" class="a" />
-                    <use xlink:href="#b" class="b" />
-                </svg>
-                <svg class="power-on">
-                    <use xlink:href="#a" class="a" />
-                    <use xlink:href="#b" class="b" />
-                </svg>
-            </div>
-        </div>
-        <span style="color: lavender">Click to start the Machine</span>
-        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-            <symbol xmlns="http://www.w3.org/2000/svg" id="a" viewBox="0 0 150 150">
-                <path d="M75 34v24" />
-            </symbol>
-            <symbol xmlns="http://www.w3.org/2000/svg" id="b" viewBox="0 0 150 150">
-                <circle cx="75" cy="80" r="35" />
-            </symbol>
-        </svg>
-    </div>
-    <!-- Boot Elements -->
-    <div class="boot">
-        <img src="src/others/windowsLogo.svg" alt="Windows Logo" width="70" />
-        <picture>
-            <source srcset="src/others/bootLoader.svg">
-            <img src="src/others/bootLoader.gif" alt="Windows boot loader" width="50" height="50">
-        </picture>
-    </div>
-    <div class="boot-animation">
-        <!-- does not work in google chrome if the video is not muted.
-        works in firefox if autoplay permission for the site is granted.
-    works even on chrome with certain criteria fulfilled:
-    For more details: 
-    https://developers.google.com/web/updates/2017/09/autoplay-policy-changes -->
-        <audio preload="auto" width="150" height="150" id="startupAudio">
-            <source src="src/sounds/Windows Startup.webm" type="audio/webm">
-            <source src="src/sounds/Windows Startup.mp3" type="audio/mp3">
-        </audio>
-    </div>
-
-    <!-- EDGE BROWSER -->
-    <!--
-    <div id = "browser" class="resizableWindow resizable">
-        <div class="tittleWindow">
-            <p>Edge</p>
-        </div>
-        <iframe class="frameresizableWindow" src="https://www.bing.com/"></iframe>
-    </div>
-    -->
-    <!-- EDGE BROWSER -->
-    <div class="desktop">
-        <div class="desktopIcons">
-            <!-- desktop icon 1 -->
-            <figure id="deskcomp">
-                <img src="src/icons/Computer.png" alt="Windows 11 This PC icon">
-                <figcaption class="iconName">This PC</figcaption>
-            </figure>
-            <!-- desktop icon 2 -->
-            <figure id="deskvscode" onclick="window.open ('https://github.com/Burger-Inc/burger-tech-app/releases/download/1.0.0/setup.exe')">
-                <img src="src/icons/assetBurgerLogo.svg" alt="Visual Studio Code Icon">
-                <figcaption class="iconName">BurgerTech</figcaption>
-            </figure>
-            <!-- desktop icon 3 -->
-            <figure id="deskbrowser" onclick="executeProgram('msedge')">
-                <!-- <button onclick = "OCBROWSER()" id = "browserbtn" class = "Iconshell"> -->
-                <img src="src/icons/edge.svg" alt="Microsoft Edge Icon">
-                <figcaption class="iconName">Microsoft Edge</figcaption>
-                <!-- </button> -->
-            </figure>
-        </div>
-    </div>
-
-    <div class="start">
-        <div class="search">
-            <label>
-                <input type="text" placeholder="Type here to search" id="searchBar">
-            </label>
-        </div>
-        <div class="pinned">
-            <div class="start-top-elements">
-                <span>Pinned</span>
-                <button class="openAll" id="allapps">All apps <img src="src/icons/right.svg" alt="open all apps"
-                        class="smallRight"></button>
-            </div>
-            <div class="start-icons">
-                <figure id="startEdge" onclick="executeProgram('msedge')">
-                    <img src="src/icons/edge.svg" alt="Windows 11 Edge icon">
-                    <figcaption>Edge</figcaption>
-                </figure>
-                <figure id="startWord">
-                    <img src="src/icons/word.svg" alt="MS Word icon">
-                    <figcaption>Word</figcaption>
-                </figure>
-                <figure id="startExcel" onclick="executeProgram('excel')">
-                    <img src="src/icons/excel.svg" alt="MS Excel icon">
-                    <figcaption>Excel</figcaption>
-                </figure>
-                <figure id="startPowerPoint" onclick="executeProgram('powerpoint')">
-                    <img src="src/icons/powerPoint.svg" alt="PowerPoint icon">
-                    <figcaption>PowerPoint</figcaption>
-                </figure>
-                <figure id="startMail">
-                    <img src="src/icons/mail.svg" alt="Windows Mail icon">
-                    <figcaption>Mail</figcaption>
-                </figure>
-                <figure id="startCalendar">
-                    <img src="src/icons/calender.svg" alt="Windows Calender icon">
-                    <figcaption>Calender</figcaption>
-                </figure>
-                <figure id="startStore">
-                    <img src="src/icons/store.png" alt="Windows 11 Microsoft Store icon">
-                    <figcaption>MS Store</figcaption>
-                </figure>
-                <figure id="startPhotos">
-                    <img src="src/icons/photos.svg" alt="Windows Photos icon">
-                    <figcaption>Photos</figcaption>
-                </figure>
-                <figure id="startOneNote">
-                    <img src="src/icons/oneNote.svg" alt="OneNote icon">
-                    <figcaption>OneNote</figcaption>
-                </figure>
-                <figure id="startYourPhone">
-                    <img src="src/icons/yourPhone.svg" alt="Windows Your Phone icon">
-                    <figcaption>Your Phone</figcaption>
-                </figure>
-                <figure id="startToDo">
-                    <img src="src/icons/toDo.svg" alt="Microsoft To DO icon">
-                    <figcaption>To Do</figcaption>
-                </figure>
-                <figure id="startLinkedIn">
-                    <img src="src/icons/linkedIn.svg" alt="LinkedIn icon">
-                    <figcaption>LinkedIn</figcaption>
-                </figure>
-                <figure id="startSettings" onclick="executeProgram('settings')">
-                    <img src="src/icons/settings.svg" alt="Windows 11 Settings icon">
-                    <figcaption>Settings</figcaption>
-                </figure>
-                <figure id="startCalci">
-                    <img src="src/icons/calculator.svg" alt="Windows Calculator icon">
-                    <figcaption>Calculator</figcaption>
-                </figure>
-                <figure id="startWhiteboard">
-                    <img src="src/icons/whiteboard.png" alt="Windows Whiteboard icon">
-                    <figcaption>Whiteboard</figcaption>
-                </figure>
-                <figure id="startSnip">
-                    <img src="src/icons/snipSketch.svg" alt="Windows Snipping Tool icon">
-                    <figcaption>Snipping Tool</figcaption>
-                </figure>
-                <figure id="startMovies">
-                    <img src="src/icons/movies.svg" alt="Windows Movies & TV icon">
-                    <figcaption>Movies & TV</figcaption>
-                </figure>
-                <figure id="startClock">
-                    <img src="src/icons/clock.svg" alt="Windows Clock icon">
-                    <figcaption>Clock</figcaption>
-                </figure>
-            </div>
-        </div>
-        <div class="recommended">
-            <div class="start-top-elements">
-                <span>Recommended</span>
-                <button class="openAll">More<img src="src/icons/right.svg" alt="open all apps"
-                        class="smallRight"></button>
-            </div>
-        </div>
-        <div class="others">
-            <div class="user">
-                <img src="src/icons/user.png" alt="Windows 11 User icon">
-                <span>0xb4dc0d3x</span>
-            </div>
-            <a href="src/redirects/shutdown/logoff.html"><img src="src/icons/shutdown.svg" alt="Windows 11 Shutdown icon" id="shutdown"></a>
-        </div>
-    </div>
-    <div class="taskbar">
-        <div class="center">
-            <img src="src/icons/startButton.png" alt="Windows 11 start icon" id="starticon">
-            <img src="src/icons/search.svg" alt="Windows 11 Search icon" id="searchIcon">
-            <img src="src/icons/taskView.svg" alt="Windows 11 Task View icon" id="taskviewIcon">
-            <img src="src/icons/widgets.svg" alt="Windows 11 widgets" id="widgetsIcon">
-            <img src="src/icons/teams.svg" alt="Microsoft Teams icon" id="teamsIcon">
-            <img src="src/icons/fileExplorer.png" alt="Windows 11 File Explorer icon" id="filesIcon">
-            <img src="src/icons/edge.svg" alt="Windows 11 Edge icon" onclick="executeProgram('msedge')" id="edgeIcon">
-            <img src="src/icons/store.png" alt="Windows 11 Store icon" id="storeIcon">
-        </div>
-        <div class="right">
-            <img src="src/icons/up.svg" alt="Up arrow">
-            <img src="src/icons/keyboard.svg" alt="Keyboard Meta Keys" id="keyboardOpener">
-            <div class="action-center-button" onclick="document.getElementById('acCheck').click()">
-                <input type="checkbox" name="acCheck" id="acCheck" style="display: none;" checked>
-                <img src="src/icons/wifi.svg" alt="WiFi" id="wifi">
-                <img src="src/icons/speaker.svg" alt="Speaker">
-                <img src="src/icons/batteryFull.svg" alt="Battery Full">
-            </div>
-            <div class="time-date">
-                <span></span>
-                <span></span>
-                <input type="checkbox" name="ncCheck" id="ncCheck" style="display: none;" checked>
-            </div>
-        </div>
-    </div>
-    <link rel="stylesheet" href="src/css/actionCenter.css">
-    <div class="action-center">
-        <div class="buttons">
-            <figure>
-                <div>
-                    <img src="src/icons/wifi.svg" alt="WiFi Icon">
-                    <img src="src/icons/right.svg" alt="Right Icon">
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-5 col-lg-5">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a class="active" href="index.html">home</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
                 </div>
-                <figcaption>WiFi</figcaption>
-            </figure>
-            <figure>
-                <img src="src//icons/bluetooth.svg" alt="Bluetooth Icon">
-                <figcaption>Bluetooth</figcaption>
-            </figure>
-            <figure>
-                <img src="src/icons/airplane.svg" alt="Airplane Icon">
-                <figcaption>Airplane Mode</figcaption>
-            </figure>
-            <figure>
-                <img src="src/icons/batterySaver.svg" alt="Battery Saver Icon">
-                <figcaption>Battery Saver</figcaption>
-            </figure>
-            <figure>
-                <img src="src/icons/focusAssist.svg" alt="Focus Assist Icon">
-                <figcaption>Focus Assist</figcaption>
-            </figure>
-            <figure>
-                <div>
-                    <img src="src/icons/accessability.svg" alt="Accessability Icon">
-                    <img src="src/icons/right.svg" alt="Right Icon">
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_1 overlay">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-xl-9 col-md-9 col-md-12">
+                            <div class="slider_text text-center">
+                                <div class="deal_text">
+                                    <span>hey yo</span>
+                                </div>
+                                <h3>Burger</h3>
+                                <h4>Industries</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <figcaption>Accessability</figcaption>
-            </figure>
-        </div>
-        <div class="sliders">
-            <div class="brightness">
-                <img src="src/icons/brightness.svg" alt="Brightness Icon">
-                <input type="range" min="0" max="100" step="1" value="100">
             </div>
-            <div class="volume">
-                <img src="src/icons/speaker.svg" alt="Speaker Icon">
-                <input type="range" min="0" max="100" step="1" value="100">
-                <img src="src/icons/right.svg" alt="Right Icon">
-            </div>
-        </div>
-        <div class="ac-bottom">
-            <div class="battery">
-                <img src="src/icons/batteryFull.svg" alt="Battery Icon">
-                <span></span>
-            </div>
-            <div class="options">
-                <img src="src/icons/edit.svg" alt="Edit Icon">
-                <img src="src/icons/options.svg" alt="Options Icon">
+            <div class="single_slider  d-flex align-items-center slider_bg_2 overlay">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-xl-9 col-md-9 col-md-12">
+                            <div class="slider_text text-center">
+                                <div class="deal_text">
+                                    <span>hey yo</span>
+                                </div>
+                                <h3>Burger</h3>
+                                <h4>Industries</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="notification-center">
-        <div class="notifications">
-        </div>
-        <div class="calender">
-            <div class="calender-top">
-                <span>Calender</span>
-                <img src="src/icons/down.svg" alt="Down Icon" width="20" height="20">
+    <!-- slider_area_end -->
+
+    <div class="best_burgers_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center mb-80">
+                        <span>A new different Burger</span>
+                        <h3>Best Ever Burger</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="single_delicious d-flex align-items-center">
+                        <div>
+                            <img src="img/assetBurgerLogo.svg" alt="" width="166" height="166">
+                        </div>
+                        <div class="info">
+                            <h3>Burger Tech</h3>
+                            <p>Great way to get less ping in some games.</p>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="iteam_links">
+                        <a class="boxed-btn5"
+                            href="https://github.com/Burger-Inc/burger-tech-app/releases/download/1.0.0/setup.exe">Download</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="context-menu">
-        <div class="item"><img src="src/icons/view.svg" alt="View"> View <img src="src/icons/right.svg" alt="Right arrow"></div>
-        <div class="item"><img src="src/icons/sort.svg" alt="Sort"> Sort by <img src="src/icons/right.svg" alt="Right arrow"></div>
-        <hr>
-        <div class="item">Refresh</div>
-        <div class="item"><img src="src/icons/new.svg" alt="New"> New item <img src="src/icons/right.svg" alt="Right arrow"></div>
-        <hr>
-        <div class="item"><img src="src/icons/display.svg" alt="Display"> Display settings</div>
-        <div class="item"><img src="src/icons/personalize.png" alt="Personalize"> Personalize</div>
-        <hr>
-        <div class="item"><img src="src/icons/terminal.png" alt="Terminal"> Open in Windows Terminal</div>
-        <hr>
-        <div class="item"><img src="src/icons/more.svg" alt="More"> Show more options <img src="src/icons/right.svg" alt="Right arrow"></div>
+    <!-- features_room_startt -->
+    <div class="Burger_President_area">
+        <div class="Burger_President_here">
+            <div class="single_Burger_President">
+                <div class="room_thumb">
+                    <img src="img/burgers/1.png" alt="">
+                    <div class="room_heading d-flex justify-content-between align-items-center">
+                        <div class="room_heading_inner">
+                            <span></span>
+                            <h3></h3>
+                            <p></p>
+                            <a href="https://donateon.ir/Burger_Industries" class="boxed-btn3">Donate</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="single_Burger_President">
+                <div class="room_thumb">
+                    <img src="img/burgers/2.png" alt="">
+                    <div class="room_heading d-flex justify-content-between align-items-center">
+                        <div class="room_heading_inner">
+                            <span></span>
+                            <h3></h3>
+                            <p></p>
+                            <a href="https://donateon.ir/Burger_Industries" class="boxed-btn3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- making run dialog -->
-    <div class="runDialog window">
-        <div class="runHeader"> <img src="src/icons/runicon.png" alt="run icon" class="runIconSmall"> <span>Run</span>
-            <div class="optionsWrapper"><img src="src/icons/cross.svg" alt="close" class="windowOptions windowCrosser"></div>
-        </div>
-        <div class="runBody">
-            <div class="runBodyMessage"><img src="src/icons/runicon.png" alt="run Icon" id="runIconBody"><span>Type the name of the program, folder, document or internet resources, and windows will open it for you.</span></div>
-            <label for="runInputField">Open: </label><input type="text" id="runInputField" autocomplete="off">
-        </div>
-        <div class="runFooter">
-            <button class="disabledButton" id="runOkBtn">Ok</button>
-            <button>Cancel</button>
-            <button>Browse...</button>
+    <!-- features_room_end -->
+    <!-- about_area_start -->
+    <div class="about_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="about_thumb2">
+                        <div class="img_1">
+                            <img src="img/about/1.png" alt="">
+                        </div>
+                        <div class="img_2">
+                            <img src="img/about/2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-5 offset-lg-1 col-md-6">
+                    <div class="about_info">
+                        <div class="section_title mb-20px">
+                            <span>About Us</span>
+                            <h3>Best Burger <br>
+                                in your PC</h3>
+                        </div>
+                        <p>Play games with new Burger</p>
+                        <div class="img_thumb">
+                            <img src="img/signature.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="brightness-overlay"></div>
-    <div id="keyboard">
-        <div class="keys" id="keyboardHider">
-            <img src="src/icons/right.svg" alt="Hide the keyboard" style="transform: rotate(90deg);">
+    <!-- about_area_end -->
+    <!-- video_area_start -->
+    <div class="video_area video_bg overlay">
+        <div class="video_area_inner text-center">
+            <h3>Burger <br>
+                Bachelor</h3>
+            <span>How we make delicious Burger</span>
+            <div class="video_payer">
+                <a href="img/burger.mp4" class="video_btn popup-video">
+                    <i class="fa fa-play"></i>
+                </a>
+            </div>
         </div>
-        <div class="keys" data-value="Win" id="winkey">
-            <img src="src/icons/winkey.svg" alt="" style="filter: invert(1);width: 70%;">
-        </div>
-        <div class="keys" data-value="Alt" id="altKey">Alt</div>
-        <div class="keys" data-value="Ctrl" id="ctrlKey">Ctrl</div>
     </div>
-    <div class="imagesToBePreloaded" style="display: none;"></div>
-    <!--
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="src/js/jquery-ui.min.js"></script>
-    <script src="src/js/iframes-apps.js"></script>
-    -->
-    <script src="src/js/boot.js"></script>
-    <script src="src/js/start.js"></script>
-    <script src="src/js/desktop.js"></script>
-    <script src="src/js/window.js"></script>
-    <script src="src/js/run.js"></script>
-    <script src="src/js/keyboard.js"></script>
-    <script src="src/js/taskbar.js"></script>
-    <script src="src/js/notification.js"></script>
-    <link rel="stylesheet" type="text/css" href="src/css/webapps.css">
-    <link rel="stylesheet" type="text/css" href="src/css/animations.css">
-    <script src="src/js/tutorial.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
-    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css">
-    <script src="src/js/tooltip.js"></script>
+    <!-- video_area_end -->
+
+    <!-- testimonial_area_start  -->
+    <div class="testimonial_area ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title mb-60 text-center">
+                        <span>Feedbacks</span>
+                        <h3>Happy Customers</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="testmonial_active owl-carousel">
+                        <div class="single_carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="single_testmonial text-center">
+                                        <p>hanoz download nakardam</p>
+                                        <div class="testmonial_author">
+                                            <div class="thumb">
+                                                <img class="corner-img"
+                                                    src="https://cdn.discordapp.com/avatars/908016321919336449/87dae22453586112cc8787844cbb53ef.png?size=60"
+                                                    alt="Avatar">
+                                            </div>
+                                            <h4>gaZe</h4>
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="single_testmonial text-center">
+                                        <p>nashnidam, nadidam and nag***m.</p>
+                                        <div class="testmonial_author">
+                                            <div class="thumb">
+                                                <img class="corner-img"
+                                                    src="https://cdn.discordapp.com/avatars/600583299873898499/c8b9823ac3b0dc70300828c5266de87b.png?size=60"
+                                                    alt="Avatar">
+                                            </div>
+                                            <h4>Dr.Noname</h4>
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="single_testmonial text-center">
+                                        <p>danlod kardan ya nakardan
+                                            masale in ast.</p>
+                                        <div class="testmonial_author">
+                                            <div class="thumb">
+                                                <img class="corner-img"
+                                                    src="https://cdn.discordapp.com/avatars/423551874801598474/f094af6a5cf5e1ab8405531f0dc2808b.png?size=60"
+                                                    alt="Avatar">
+                                            </div>
+                                            <h4>TiTap</h4>
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- testimonial_area_ned  -->
+
+    <!-- instragram_area_start -->
+    <div class="instragram_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_instagram">
+                        <img src="img/instragram/1.png" alt="">
+                        <div>
+                            <a href="#">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_instagram">
+                        <img src="img/instragram/2.png" alt="">
+                        <div>
+                            <a href="">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_instagram">
+                        <img src="img/instragram/3.png" alt="">
+                        <div>
+                            <a href="">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_instagram">
+                        <img src="img/instragram/4.png" alt="">
+                        <div>
+                            <a href="#">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- instragram_area_end -->
+
+    <footer class="footer">
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            by 0xb4dc0d3x</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+
+    <script src="js/main.js"></script>
 
 </body>
 
